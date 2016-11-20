@@ -7,18 +7,18 @@
             android:icon="@mipmap/ic_home_black_24dp"
             android:title="@string/nav_home" />
         <item
-            android:id="@+id/nav_photos"
-            android:icon="@mipmap/ic_photo_library_black_24dp"
-            android:title="@string/nav_photos" />
+            android:id="@+id/nav_gauge"
+            android:icon="@mipmap/ic_build_black_24dp"
+            android:title="@string/nav_gauge" />
         <item
-            android:id="@+id/nav_movies"
-            android:icon="@mipmap/ic_local_movies_black_24dp"
-            android:title="@string/nav_movies" />
+            android:id="@+id/nav_order"
+            android:icon="@mipmap/ic_network_check_black_24dp"
+            android:title="@string/nav_order" />
 
         <item
-            android:id="@+id/nav_notifications"
-            android:icon="@mipmap/ic_notifications_black_24dp"
-            android:title="@string/nav_notifications" />
+            android:id="@+id/nav_info"
+            android:icon="@mipmap/ic_info_outline_black_24dp"
+            android:title="@string/nav_info" />
 
         <item
             android:id="@+id/nav_settings"

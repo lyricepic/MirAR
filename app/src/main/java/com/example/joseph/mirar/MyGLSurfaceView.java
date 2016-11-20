@@ -72,4 +72,20 @@ public class MyGLSurfaceView extends GLSurfaceView {
 
         Log.d("surfaceChanged", "w : " + w + ", h : " + h);
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mRenderer == null) {
+            return;
+        }
+
+        mRenderer.stopMediaPlayer();
+    }
+
+    // 임시 코딩
+    public MyGLRenderer getMyGLRenderer(){
+        return mRenderer;
+    }
 }

@@ -12,7 +12,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -32,6 +31,7 @@ import android.widget.Toast;
 import com.example.joseph.mirar.CameraSurface;
 import com.example.joseph.mirar.MyGLSurfaceView;
 import com.example.joseph.mirar.R;
+import com.example.joseph.mirar.fragment.ChartFragment;
 
 import org.artoolkit.ar.base.ARToolKit;
 import org.artoolkit.ar.base.camera.CameraEventListener;
@@ -66,9 +66,9 @@ public class DrawerActivity extends AppCompatActivity implements CameraEventList
 
     // tags used to attach the fragments
     private static final String TAG_HOME = "home";
-    private static final String TAG_PHOTOS = "photos";
-    private static final String TAG_MOVIES = "movies";
-    private static final String TAG_NOTIFICATIONS = "notifications";
+    private static final String TAG_GAUGE = "gauge";
+    private static final String TAG_ORDER = "order";
+    private static final String TAG_INFO = "information";
     private static final String TAG_SETTINGS = "settings";
     public static String CURRENT_TAG = TAG_HOME;
 
@@ -257,7 +257,7 @@ public class DrawerActivity extends AppCompatActivity implements CameraEventList
 //                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 //                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
 //                        android.R.anim.fade_out);
-//                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+//                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);;
 //                fragmentTransaction.commitAllowingStateLoss();
             }
         };
@@ -277,12 +277,12 @@ public class DrawerActivity extends AppCompatActivity implements CameraEventList
         invalidateOptionsMenu();
     }
 
-//    private Fragment getHomeFragment() {
-//        switch (navItemIndex) {
-//            case 0:
-//                // home
-//                HomeFragment homeFragment = new HomeFragment();
-//                return homeFragment;
+    private Fragment getHomeFragment() {
+        switch (navItemIndex) {
+            case 0:
+                // home
+                ChartFragment chartFragment = new ChartFragment();
+                return chartFragment;
 //            case 1:
 //                // photos
 //                PhotosFragment photosFragment = new PhotosFragment();
@@ -300,10 +300,10 @@ public class DrawerActivity extends AppCompatActivity implements CameraEventList
 //                // settings fragment
 //                SettingsFragment settingsFragment = new SettingsFragment();
 //                return settingsFragment;
-//            default:
-//                return new HomeFragment();
-//        }
-//    }
+            default:
+                return new ChartFragment();
+        }
+    }
 
     private void setToolbarTitle() {
         getSupportActionBar().setTitle(activityTitles[navItemIndex]);
@@ -328,17 +328,17 @@ public class DrawerActivity extends AppCompatActivity implements CameraEventList
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
-                    case R.id.nav_photos:
+                    case R.id.nav_gauge:
                         navItemIndex = 1;
-                        CURRENT_TAG = TAG_PHOTOS;
+                        CURRENT_TAG = TAG_GAUGE;
                         break;
-                    case R.id.nav_movies:
+                    case R.id.nav_order:
                         navItemIndex = 2;
-                        CURRENT_TAG = TAG_MOVIES;
+                        CURRENT_TAG = TAG_ORDER;
                         break;
-                    case R.id.nav_notifications:
+                    case R.id.nav_info:
                         navItemIndex = 3;
-                        CURRENT_TAG = TAG_NOTIFICATIONS;
+                        CURRENT_TAG = TAG_INFO;
                         break;
                     case R.id.nav_settings:
                         navItemIndex = 4;
@@ -367,6 +367,11 @@ public class DrawerActivity extends AppCompatActivity implements CameraEventList
                 menuItem.setChecked(true);
 
                 loadHomeFragment();
+
+                // put MYGLRenderer to item index.
+                if(glSurfaceView != null){
+                    ((MyGLSurfaceView)glSurfaceView).getMyGLRenderer().setNaviItemIdx(navItemIndex);
+                }
 
                 return true;
             }
